@@ -4,7 +4,7 @@ set -eu
 echo "Calling Maven ..."
 
 cd source-code
-mvn jar
+mvn package
 
 echo "Copying artifacts ..."
 cp -r target/*.jar ../artifact
