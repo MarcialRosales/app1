@@ -25,7 +25,7 @@ resources:
     uri: {{source-code-url}}
     private_key: {{source-code-private-key}}
     branch: {{source-code-branch}}
-    file: version
+    file: app1/version
 
 - name: artifact-repo
   type: maven-resource
