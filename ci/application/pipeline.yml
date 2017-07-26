@@ -33,3 +33,34 @@ jobs:
     params:
       file: build-artifact/*.jar
       pom_file: source-code/pom.xml
+
+- name: deploy
+  plan:
+  - get: artifact-repo
+    triggered: true
+    passed: [build-and-verify]
+  - get: source-code
+  - task: generate-manifest
+    file: source-code/tasks/generate-manifest.yml
+    params:
+      APP_NAME: demo
+      APP_HOST: demo
+      APP_DOMAIN: mydomain
+  - task: check
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: busybox
+      inputs:
+        - name: manifest
+      outputs:
+        - name: greetings
+      run:
+        path: sh
+        args:
+          - -c
+          - |
+            ls manifest
+            cat manifest/manifest.yml
