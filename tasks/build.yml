@@ -6,6 +6,7 @@ image_resource:
     tag: 3.3.9-jdk-8
 inputs:
   - name: source-code
+  - name: version
 outputs:
   - name: build-artifact
 run:

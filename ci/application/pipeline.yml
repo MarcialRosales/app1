@@ -13,6 +13,18 @@ resources:
   source:
     uri: {{source-code-url}}
     branch: {{source-code-branch}}
+    ignore_paths:
+      - version
+
+- name: version
+  type: semver
+  source:
+    driver: git
+    initial_version: 0.0.1-SNAPSHOT
+    uri: {{source-code-url}}
+    private_key: {{source-code-private-key}}
+    branch: {{source-code-branch}}
+    file: version
 
 - name: artifact-repo
   type: maven-resource
@@ -37,6 +49,7 @@ jobs:
   plan:
   - get: source-code
     trigger: true
+  - get: version
   - task: build-and-verify
     file: source-code/tasks/build.yml
   - put: artifact-repo
