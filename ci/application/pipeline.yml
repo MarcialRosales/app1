@@ -37,7 +37,7 @@ jobs:
 - name: deploy
   plan:
   - get: artifact-repo
-    triggered: true
+    trigger: true
     passed: [build-and-verify]
   - get: source-code
   - task: generate-manifest
