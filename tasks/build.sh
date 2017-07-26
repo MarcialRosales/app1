@@ -2,11 +2,11 @@
 
 set -eu
 
-VERSION=`cat version/number`
+VERSION=`cat version/number`-SNAPSHOT
 
 cd source-code
 
-echo "Setting maven with version to build"
+echo "Setting maven with version ${VERSION}"
 mvn versions:set -DnewVersion=${VERSION}
 
 mvn package
