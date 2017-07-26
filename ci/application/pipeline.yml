@@ -1,11 +1,26 @@
 ---
 
+resource_types:
+- name: maven-resource
+  type: docker-image
+  source:
+    repository: pivotalpa/maven-resource
+    tag: latest
+
 resources:
 - name: source-code
   type: git
   source:
     uri: https://github.com/MarcialRosales/app1
     branch: master
+
+- name: artifact-repo
+  type: maven-resource
+  source:
+    url: http://192.168.1.36:8081/nexus/content/repositories/snapshots
+    artifact: com.example:demo:jar
+    username: admin
+    password: admin123
 
 jobs:
 - name: build-and-verify
@@ -14,3 +29,7 @@ jobs:
     trigger: true
   - task: build-and-verify
     file: source-code/tasks/build.yml
+  - put: artifact-repo
+    params:
+      file: build-artifact/*.jar
+      pom_file: source-code/pom.xml
