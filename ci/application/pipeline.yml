@@ -1,0 +1,16 @@
+---
+
+resources:
+- name: source-code
+  type: git
+  source:
+    uri: https://github.com/MarcialRosales/app1
+    branch: master
+
+jobs:
+- name: build-and-verify
+  plan:
+  - get: source-code
+    trigger: true
+  - task: build-and-verify
+    file: source-code/tasks/build.yml
