@@ -44,6 +44,7 @@
 	<build>
 		<resources>
      		<resource>
+			 	<targetPath>terraform</targetPath>
        			<directory>terraform</directory>
      		</resource>
    		</resources>
