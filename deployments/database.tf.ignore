@@ -1,0 +1,13 @@
+resource "cf_user_provided_service" "database" {
+  name = "database"
+  space = "${data.cf_space.space.id}"
+  credentials = {
+    "url" = "${var.database_url}"
+    "username" = "${var.database_username}"
+    "password" = "${var.database_password}"
+  }
+}
+
+variable "database_url" {}
+variable "database_username" {}
+variable "database_password" {}
